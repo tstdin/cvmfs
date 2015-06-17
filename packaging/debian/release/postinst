@@ -2,5 +2,5 @@
 
 set -e
 
-sudo apt-key add /etc/apt/trusted.gpg.d/DEB-GPG-KEY-CernVM
-sudo echo "deb http://molina-deb.cern.ch/cvmrepo/apt/ cvmfs main server keys config" >> /etc/apt/sources.list
+apt-key add /etc/apt/trusted.gpg.d/DEB-GPG-KEY-CernVM
+apt-add-repository -y "deb http://molina-deb.cern.ch/cvmrepo/apt/ cvmfs main server keys config"

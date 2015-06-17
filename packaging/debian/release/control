@@ -1,4 +1,4 @@
-Source: cvmfs-deb-release
+Source: cvmfs-release
 Maintainer: Jose Molina <jose.molina@cern.ch>
 Section: utils
 Priority: extra
