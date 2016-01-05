@@ -1548,9 +1548,7 @@ static void cvmfs_getxattr(fuse_req_t req, fuse_ino_t ino, const char *name,
   } else if (attr == "user.version") {
     attribute_value = string(VERSION) + "." + string(CVMFS_PATCH_LEVEL);
   } else if (attr == "user.pubkey") {
-    const char *pubkey =
-        cvmfs::signature_manager_->GetLastSuccessfulVerificationKey();
-    attribute_value = pubkey ? pubkey : "";
+    attribute_value = cvmfs::signature_manager_->GetLastSuccessfulPubkey();
   } else if (attr == "user.hash") {
     if (!d.checksum().IsNull()) {
       attribute_value = d.checksum().ToString();
@@ -1762,7 +1760,7 @@ static void cvmfs_listxattr(fuse_req_t req, fuse_ino_t ino, size_t size) {
     "user.host\0user.proxy\0user.uptime\0user.nclg\0user.nopen\0"
     "user.ndownload\0user.timeout\0user.timeout_direct\0user.rx\0user.speed\0"
     "user.fqrn\0user.ndiropen\0user.inode_max\0user.tag\0user.host_list\0"
-    "user.external_host\0user.external_data\0user.external_timeout\0";
+    "user.external_host\0user.external_data\0user.external_timeout\0"
     "user.pubkey\0";
   string attribute_list;
   if (hide_magic_xattrs_) {

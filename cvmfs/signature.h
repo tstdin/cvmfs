@@ -54,8 +54,6 @@ class SignatureManager {
             unsigned char **signature, unsigned *signature_size);
   bool Verify(const unsigned char *buffer, const unsigned buffer_size,
               const unsigned char *signature, unsigned signature_size);
-  bool VerifyRsa(const unsigned char *buffer, const unsigned buffer_size,
-                 const unsigned char *signature, unsigned signature_size);
   bool VerifyLetter(const unsigned char *buffer, const unsigned buffer_size,
                     const bool by_rsa);
   bool VerifyPkcs7(const unsigned char *buffer, const unsigned buffer_size,
@@ -69,13 +67,15 @@ class SignatureManager {
 
   // Returns the PEM-encoded text of the last key used to successfully
   // verify data.
-  const char *GetLastSuccessfulVerificationKey() {return last_letter_pubkey_;}
+  std::string GetLastSuccessfulPubkey() { return last_successful_pubkey_; }
 
  private:
   void InitX509Store();
-  char *GenerateKeyText(RSA *pubkey);
+  std::string GenerateKeyText(RSA *pubkey);
+  bool VerifyRsa(const unsigned char *buffer, const unsigned buffer_size,
+                 const unsigned char *signature, unsigned signature_size);
 
-  char *last_letter_pubkey_;
+  std::string last_successful_pubkey_;
   EVP_PKEY *private_key_;
   X509 *certificate_;
   std::vector<RSA *> public_keys_;  /**< Contains cvmfs public master keys */
