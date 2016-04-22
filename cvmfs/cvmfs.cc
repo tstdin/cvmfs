@@ -71,7 +71,7 @@
 #include "atomic.h"
 #include "auto_umount.h"
 #include "backoff.h"
-#include "cache.h"
+#include "cache_posix.h"
 #include "catalog_mgr_client.h"
 #include "clientctx.h"
 #include "compat.h"
