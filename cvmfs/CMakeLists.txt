@@ -51,6 +51,7 @@ set (CVMFS_CLIENT_SOURCES
   fs_traversal.h
   globals.cc globals.h
   hash.cc hash.h
+  kvstore.h kvstore.cc
   logging.cc logging.h logging_internal.h
   lru.h
   manifest.cc manifest.h
