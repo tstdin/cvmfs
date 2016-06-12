@@ -28,6 +28,7 @@ form information and are therefore hard to access in an automatic fashion.
 
 Sets the build architecture to ia32 on certain old 32 bit platforms.
 
+A fourth patch fixes compilation on the Raspberry Pi.
 
 
 Here you have a mapping to the original archive names:

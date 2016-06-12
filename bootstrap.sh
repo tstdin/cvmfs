@@ -122,7 +122,8 @@ patch_external "leveldb"     "dont_search_snappy.patch"           \
 patch_external "pacparser"   "fix_find_proxy_ex.patch"
 patch_external "tbb"         "custom_library_suffix.patch"        \
                              "symlink_to_build_directories.patch" \
-                             "32bit_mock.patch"
+                             "32bit_mock.patch"                   \
+                             "raspberry.patch"
 patch_external "vjson"       "missing_include.patch"
 patch_external "sparsehash"  "fix_sl4_compilation.patch"
 patch_external "libcurl"     "disable_sslv3.patch"
