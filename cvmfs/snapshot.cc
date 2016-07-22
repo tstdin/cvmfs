@@ -6,3 +6,5 @@
 #include "snapshot.h"
 
 using namespace std;  // NOLINT
+
+const char *SnapshotRegistry::kPathPrefix = "/.cvmfs_snapshots";
