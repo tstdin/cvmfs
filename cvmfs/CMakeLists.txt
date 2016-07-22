@@ -79,6 +79,7 @@ set (CVMFS_CLIENT_SOURCES
   sink.h
   smallhash.h
   smalloc.h
+  snapshot.cc snapshot.cc
   sql.cc sql.h sql_impl.h
   sqlitemem.cc sqlitemem.h
   sqlitevfs.cc sqlitevfs.h
