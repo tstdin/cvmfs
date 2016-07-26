@@ -38,23 +38,24 @@ class SnapshotRegistry {
     const static int32_t kTagVirtual = -2;
     const static int32_t kTagInvalid = -3;
     int32_t tag_;
-  };
+  };  // struct Tag
 
   explicit SnapshotRegistry(MountPoint *mountpoint_head)
     : mountpoint_head_(mountpoint_head)
     , snapshots_(NULL)
-    , num_snapshots_(0) { }
+    , num_snapshots_(0)
+    , path_prefix_(std::string(kPathPrefix)) { }
+
 
   Tag Inode2Tag(uint64_t inode) {
     uint64_t tag_in_inode = (inode & kInodeMask) >> kInodeBits;
-    uint32_t tag = tag_in_inode;
-    switch (tag) {
+    switch (tag_in_inode) {
       case 0:
         return Tag(Tag::kTagHead);
       case 1:
         return Tag(Tag::kTagVirtual);
       default:
-        uint32_t idx = tag - 2;
+        uint32_t idx = tag_in_inode - 2;
         return (idx >= num_snapshots_) ? Tag(Tag::kTagInvalid) : Tag(idx);
     }
   }
@@ -62,6 +63,9 @@ class SnapshotRegistry {
 
   Tag Path2Tag(const PathString &path) {
     // TODO(jblomer)
+    if (!path.StartsWith(path_prefix_))
+      return Tag(Tag::kTagHead);
+
     return Tag(Tag::kTagInvalid);
   }
 
@@ -92,6 +96,7 @@ class SnapshotRegistry {
   MountPoint *mountpoint_head_;
   SnapshotInfo *snapshots_;
   unsigned num_snapshots_;
+  PathString path_prefix_;
 };  // class MountPointRegistry
 
 #endif  // CVMFS_SNAPSHOT_H_
