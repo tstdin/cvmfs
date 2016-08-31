@@ -146,7 +146,8 @@ class MemoryKvStore :SingleCopy {
   bool IncRef(const shash::Any &id);
 
   /**
-   * Decrease the reference count on the entry at id. If the refcount is zero, no effect
+   * Decrease the reference count on the entry at id. If the refcount is zero,
+   * no effect
    * @param id The hash key
    * @returns True if the entry exists and was updated
    */
@@ -168,8 +169,8 @@ class MemoryKvStore :SingleCopy {
     size_t offset);
 
   /**
-   * Insert a new memory buffer. The KvStore takes ownership of the referred memory, so
-   * callers must not free() it themselves
+   * Insert a new memory buffer. The KvStore takes ownership of the referred
+   * memory, so callers must not free() it themselves
    * @param id The hash key
    * @param buf The memory buffer to insert
    * @returns True iff the commit succeeds
@@ -177,7 +178,8 @@ class MemoryKvStore :SingleCopy {
   bool Commit(const shash::Any &id, const MemoryBuffer &buf);
 
   /**
-   * Delete an entry, free()ing its memory. Note that the entry not have any references
+   * Delete an entry, free()ing its memory. Note that the entry not have any
+   * references
    * @param id The hash key
    * @returns True iff the entry was successfully deleted
    */
@@ -204,7 +206,8 @@ class MemoryKvStore :SingleCopy {
   void *ReallocBuffer(void *ptr, size_t size);
 
   /**
-   * Frees the given buffer, returning the space to the KvStore's memory allocator.
+   * Frees the given buffer, returning the space to the KvStore's memory
+   * allocator.
    * See @p malloc(3)
    */
   void FreeBuffer(void *ptr);
