@@ -19,6 +19,7 @@ set(CVMFS_UNITTEST_FILES
 
   t_async_reader.cc
   t_atomic.cc
+  t_attributes.cc
   t_authz_fetch.cc
   t_authz_session.cc
   t_backoff.cc
@@ -110,6 +111,7 @@ set (CVMFS_UNITTEST_SOURCES
 
   # test dependencies
   ${CVMFS_SOURCE_DIR}/atomic.h
+  ${CVMFS_SOURCE_DIR}/attributes.h ${CVMFS_SOURCE_DIR}/attributes.cc
   ${CVMFS_SOURCE_DIR}/authz/authz.cc ${CVMFS_SOURCE_DIR}/authz/authz.h
   ${CVMFS_SOURCE_DIR}/authz/authz_curl.cc ${CVMFS_SOURCE_DIR}/authz/authz_curl.h
   ${CVMFS_SOURCE_DIR}/authz/authz_fetch.cc ${CVMFS_SOURCE_DIR}/authz/authz_fetch.h

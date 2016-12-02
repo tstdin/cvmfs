@@ -27,6 +27,7 @@ set (CVMFS_LOADER_SOURCES
 
 set (CVMFS_CLIENT_SOURCES
   atomic.h
+  attributes.h attributes.cc
   authz/authz.h authz/authz.cc
   authz/authz_curl.h authz/authz_curl.cc
   authz/authz_fetch.h authz/authz_fetch.cc
