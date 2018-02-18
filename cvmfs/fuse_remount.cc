@@ -50,13 +50,13 @@ FuseRemounter::Status FuseRemounter::Check() {
     case catalog::kLoadNew:
       if (atomic_cas32(&drainout_mode_, 0, 1)) {
         // As of this point, fuse callbacks return zero as cache timeout
-        LogCvmfs(kLogCvmfs, kLogDebug,
-                 "new catalog revision available, "
-                 "draining out meta-data caches");
         invalidator_handle_.Reset();
         invalidator_->InvalidateInodes(&invalidator_handle_);
         atomic_inc32(&drainout_mode_);
         // drainout_mode_ == 2, IsInDrainoutMode is now 'true'
+        LogCvmfs(kLogCvmfs, kLogSyslog | kLogDebug,
+                 "new repository revision available");
+        LogCvmfs(kLogCvmfs, kLogDebug, "draining out meta-data caches");
       } else {
         LogCvmfs(kLogCvmfs, kLogDebug, "already in drainout mode, leaving");
       }
@@ -247,7 +247,8 @@ void FuseRemounter::TryFinish() {
     LeaveCriticalSection();
     return;
   }
-  LogCvmfs(kLogCvmfs, kLogDebug, "caches drained out, applying new catalog");
+  LogCvmfs(kLogCvmfs, kLogDebug | kLogSyslog,
+           "first request on new repository revision, pausing for update");
 
   // No new inserts into caches
   mountpoint_->inode_cache()->Pause();
@@ -259,6 +260,8 @@ void FuseRemounter::TryFinish() {
 
   // Ensure that all Fuse callbacks left the catalog query code
   fence_->Drain();
+  LogCvmfs(kLogCvmfs, kLogDebug | kLogSyslog,
+           "downloading new root file catalog");
   catalog::LoadError retval = mountpoint_->catalog_mgr()->Remount(false);
   if (mountpoint_->inode_annotation()) {
     inode_generation_info_->inode_generation =

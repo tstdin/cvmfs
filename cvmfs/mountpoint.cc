@@ -1054,6 +1054,7 @@ bool MountPoint::CheckBlacklists() {
  * multi-threaded context.
  */
 bool MountPoint::ReloadBlacklists() {
+  // TODO(jblomer): if a blacklist is removed, it won't be cleared I think
   bool result = true;
   bool append = false;
   for (unsigned i = 0; i < blacklist_paths_.size(); ++i) {
