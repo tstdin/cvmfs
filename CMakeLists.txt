@@ -403,6 +403,9 @@ if (BUILD_SERVER OR BUILD_SERVER_DEBUG)
     message(FATAL_ERROR "unzip utility missing. Please install unzip...")
   endif (${UNZIP_EXE} STREQUAL "UNZIP_EXE-NOTFOUND")
 
+  find_package(RabbitMQC REQUIRED)
+  set (INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${RabbitMQC_INCLUDE_DIRS})
+
   if (BUILTIN_EXTERNALS)
     set(libgeoip_names libGeoIP.a GeoIP)
     #set(ENV{PYTHONPATH} ${EXTERNALS_INSTALL_LOCATION}/lib)
