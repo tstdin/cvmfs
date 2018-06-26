@@ -244,6 +244,7 @@ set (CVMFS_SWISSKNIFE_SOURCES
   swissknife_lsrepo.cc
   swissknife_main.cc
   swissknife_migrate.cc
+  swissknife_notify.cc
   swissknife_pull.cc
   swissknife_reflog.cc
   swissknife_scrub.cc
@@ -704,7 +705,8 @@ if (BUILD_SERVER)
                          ${SQLITE3_LIBRARY} ${CURL_LIBRARIES}
                          ${CARES_LIBRARIES} ${ZLIB_LIBRARIES}
                          ${OPENSSL_LIBRARIES} ${RT_LIBRARY} ${VJSON_LIBRARIES}
-                         ${SHA3_LIBRARIES} ${CAP_LIBRARIES} ${LibArchive_LIBRARY} pthread dl)
+                         ${SHA3_LIBRARIES} ${CAP_LIBRARIES} ${LibArchive_LIBRARY}
+                         ${RabbitMQC_LIBRARIES} pthread dl)
 
   target_link_libraries(cvmfs_stratum_agent
                         ${CURL_LIBRARIES} ${CARES_LIBRARIES}
