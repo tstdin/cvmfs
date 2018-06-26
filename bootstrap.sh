@@ -16,6 +16,7 @@ PROTOBUF_VERSION=2.6.1
 MONGOOSE_VERSION=3.8
 RAPIDCHECK_VERSION=0.0
 LIBARCHIVE_VERSION=3.3.2
+RABBITMQC_VERSION=0.9.0
 
 if [ x"$EXTERNALS_LIB_LOCATION" = x"" ]; then
   echo "Bootstrap - Missing environment variable: EXTERNALS_LIB_LOCATION"
@@ -235,6 +236,10 @@ build_lib() {
       do_extract "libarchive" "libarchive-${LIBARCHIVE_VERSION}.tar.gz"
       do_build "libarchive"
       ;;
+    rabbitmq-c)
+      do_extract "rabbitmq-c" "rabbitmq-c-${RABBITMQC_VERSION}.tar.gz"
+      do_build "rabbitmq-c"
+      ;;
     *)
       echo "Unknown library name. Exiting."
       exit 1
@@ -245,7 +250,7 @@ build_lib() {
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 # Build a list of libs that need to be built
-missing_libs="libcurl pacparser zlib sparsehash leveldb googletest libgeoip protobuf googlebench sqlite3 vjson sha2 sha3 mongoose libarchive"
+missing_libs="libcurl pacparser zlib sparsehash leveldb googletest libgeoip protobuf googlebench sqlite3 vjson sha2 sha3 mongoose libarchive rabbitmq-c"
 if [ x"$BUILD_QC_TESTS" != x"" ]; then
     missing_libs="$missing_libs rapidcheck"
 fi
